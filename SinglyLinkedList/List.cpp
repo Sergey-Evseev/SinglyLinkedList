@@ -54,6 +54,7 @@ int List::GetCount()
 	return Count; //Возвращаем количество элементов
 }
 
+//метод добавления элементов//из двусвязного списка
 void List::Insert(int pos)
 {
 	if (pos == 0) //если параметр отсутствует или равен 0, то запрашиваем его
@@ -87,18 +88,18 @@ void List::Insert(int pos)
 	Element* Ins = Head; //Отсчитываем от головы n - 1 элементов
 	while (i < pos)
 	{
-		Ins = Ins->next; //Доходим до элемента, перед которым вставляемся
+		Ins = Ins->Next; //Доходим до элемента, перед которым вставляемся
 		i++;
 	}
-	Element* PrevIns = Ins->prev; //Доходим до элемента, который предшествует
+	Element* PrevIns = Ins->Prev; //Доходим до элемента, который предшествует
 	Element* temp = new Element; //Создаем новый элемент
 	//Вводим данные
 	cout << "Input new number: ";
 	cin >> temp->data;
 	if (PrevIns != 0 && Count != 1) //настройка связей
-		PrevIns->next = temp;
-	temp->next = Ins;
-	temp->prev = PrevIns;
-	Ins->prev = temp;
+		PrevIns->Next = temp;
+	temp->Next = Ins;
+	temp->Prev = PrevIns;
+	Ins->Prev = temp;
 	Count++;
-}
+} //конец метода добавления элементов//

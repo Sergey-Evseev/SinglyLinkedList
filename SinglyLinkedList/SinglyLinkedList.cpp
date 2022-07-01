@@ -20,6 +20,7 @@ void main()
 	lst.Del();
 	lst.Del();
 	lst.Print(); //Распечатываем содержимое списка
+	lst.Insert(5);
 }
 
 
