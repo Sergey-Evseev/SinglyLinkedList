@@ -64,7 +64,7 @@ void List::Insert(int pos)
 	}
 	if (pos < 1 || pos > Count + 1) //Позиция от 1 до Count?
 	{
-		cout << "Incorrect position !!!\n"; //Неверная позиция
+		cout << "Incorrect position !!!\n"; //Неверная позиция   
 		return;
 	}
 	if (pos == Count + 1) //Если вставка в конец списка
