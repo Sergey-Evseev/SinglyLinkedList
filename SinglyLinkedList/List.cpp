@@ -23,6 +23,7 @@ void List::Add(char data)
 	else { //новый элемент становится единственным если он первый добавленный
 		Head = Tail = temp;
 	}
+	Count++;
 }
 
 void List::Del()
@@ -57,49 +58,45 @@ int List::GetCount()
 //метод добавления элементов//из двусвязного списка
 void List::Insert(int pos)
 {
-	if (pos == 0) //если параметр отсутствует или равен 0, то запрашиваем его
-	{
-		cout << "Input position: ";
-		cin >> pos;
-	}
-	if (pos < 1 || pos > Count + 1) //Позиция от 1 до Count?
-	{
-		cout << "Incorrect position !!!\n"; //Неверная позиция   
-		return;
-	}
-	if (pos == Count + 1) //Если вставка в конец списка
-	{
-		int data; //Вставляемые данные
-		cout << "Input new number: ";
-		cin >> data;
-		Add(data); //Добавление в конец списка
-		return;
-	}
-	else if (pos == 1)
-	{
-		int data; //Вставляемые данные
-		cout << "Input new number: ";
-		cin >> data; //Добавление в начало списка		
-		Add(data);
-		return;
-
-	}
-	int i = 1; //Счетчик
-	Element* Ins = Head; //Отсчитываем от головы n - 1 элементов
-	while (i < pos)
-	{
-		Ins = Ins->Next; //Доходим до элемента, перед которым вставляемся
-		i++;
-	}
-	Element* PrevIns = Ins->Prev; //Доходим до элемента, который предшествует
-	Element* temp = new Element; //Создаем новый элемент
-	//Вводим данные
+	//if (pos == 0) //если параметр отсутствует или равен 0, то запрашиваем его
+	//{
+	//	cout << "Input position: ";
+	//	cin >> pos;
+	//}
+	//if (pos < 1 || pos > Count + 1) //Позиция от 1 до Count?
+	//{
+	//	cout << "Incorrect position !!!\n"; //Неверная позиция   
+	//	return;
+	//}
+	//if (pos == Count + 1) //Если вставка в конец списка
+	//{
+	//	int data; //Вставляемые данные
+	//	cout << "Input new number: ";
+	//	cin >> data;
+	//	Add(data); //Добавление в конец списка
+	//	return;
+	//}
+	//else if (pos == 1)
+	//{
+	//	int data; //Вставляемые данные
+	//	cout << "Input new number: ";
+	//	cin >> data; //Добавление в начало списка		
+	//	Add(data);
+	//	return;
+	//}	
+	
+	Element* newNode = new Element; //создание нового элемента
 	cout << "Input new number: ";
-	cin >> temp->data;
-	if (PrevIns != 0 && Count != 1) //настройка связей
-		PrevIns->Next = temp;
-	temp->Next = Ins;
-	temp->Prev = PrevIns;
-	Ins->Prev = temp;
-	Count++;
-} //конец метода добавления элементов//
+	cin >> newNode->data;
+	Element* temp = Head; //врем. элемент для поиска предшествующего вставляемому
+	for (int i = 2; i < pos; i++)
+	{
+		if (temp->Next != NULL)
+		{
+			temp = temp->Next; //доходим до последнего элемента - если поз. 3 то до 2-го
+		}		
+	}
+	newNode->Next = temp->Next; //указатель нового теперь равен указателю последнего
+	temp->Next = newNode; //меняем местами указатели temp (указывает на последний) и нового
+	Count++;	
+} //конец метода вставки элементов//
